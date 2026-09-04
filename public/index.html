@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TutoL — seu tutor paciente</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="app">
+
+    <header class="app-header">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 26C16 26 8 21.5 8 14.5C8 10.9101 10.9101 8 14.5 8C15.8483 8 17.1301 8.41209 18.2 9.15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M16 26C16 26 24 21.5 24 14.5C24 10.9101 21.0899 8 17.5 8C16.1517 8 14.8699 8.41209 13.8 9.15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M16 26V15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="16" cy="11" r="2" fill="currentColor"/>
+          </svg>
+        </span>
+        <div class="brand-text">
+          <span class="brand-name">TutoL</span>
+          <span class="brand-tag">aprender no seu ritmo</span>
+        </div>
+      </div>
+
+      <div class="agent-state" aria-live="polite">
+        <span id="statusText" class="state-pill state-status">Pronto</span>
+        <span id="toolText" class="state-pill state-tool"></span>
+      </div>
+    </header>
+
+    <main class="app-main">
+
+      <section class="chat-panel" aria-label="Conversa">
+        <div id="messages" class="messages" aria-live="polite" aria-atomic="false">
+          <div class="message assistant" data-role="assistant">
+            <div class="message-bubble">
+              Oi, eu sou o TutoL! 🌱 Pode me contar o que você está tentando aprender
+              hoje — vamos com calma, no seu tempo.
+            </div>
+          </div>
+        </div>
+
+        <form id="agentForm" class="composer" autocomplete="off">
+          <label for="userInput" class="sr-only">Escreva sua pergunta</label>
+          <input
+            id="userInput"
+            class="composer-input"
+            type="text"
+            name="userInput"
+            placeholder="Escreva sua dúvida aqui..."
+            required
+          />
+          <button id="sendButton" class="composer-send" type="submit">
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M3 10L17 3L12.5 17L9.5 11L3 10Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+            </svg>
+            <span>Enviar</span>
+          </button>
+        </form>
+      </section>
+
+      <aside class="memory-panel" aria-label="Memória do agente">
+        <details class="memory-details" open>
+          <summary class="memory-summary">
+            <span>Memória</span>
+            <svg class="memory-chevron" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </summary>
+          <p class="memory-hint">O que o TutoL já sabe sobre o seu aprendizado.</p>
+          <ul id="memoryList" class="memory-list">
+            <li class="memory-empty">Ainda não há memórias registradas.</li>
+          </ul>
+        </details>
+      </aside>
+
+    </main>
+  </div>
+
+</body>
+</html>
