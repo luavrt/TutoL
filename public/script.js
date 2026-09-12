@@ -34,8 +34,13 @@ function adicionarMensagem(tipo, texto) {
   // Adiciona as classes de estilo da bolha.
   bolha.className = `message ${tipo}`;
 
-  // Coloca o texto dentro da bolha com segurança.
-  bolha.textContent = texto;
+ // Se for mensagem do agente, renderiza como HTML (ele responde com formatação).
+  // Se for do usuário ou erro, mantém como texto puro por segurança.
+  if (tipo === "agent") {
+    bolha.innerHTML = texto;
+  } else {
+    bolha.textContent = texto;
+  }
 
   // Insere a bolha na área de mensagens.
   areaMensagens.appendChild(bolha);
