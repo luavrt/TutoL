@@ -313,16 +313,23 @@ app.post("/api/agent", async (req, res) => {
       memorias,
     });
   } catch (erro) {
-    // Mostra o erro completo no terminal do servidor.
-    console.error(erro);
+  // Mostra o erro completo no terminal do servidor.
+  console.error(erro);
 
-    // Retorna uma mensagem simples para a interface.
-    return res.status(500).json({
-      erro:
-        erro?.message ||
-        "Não foi possível conversar com o Gemini.",
-    });
-  }
+  // Verifica se o erro é de cota/limite excedido (código 429).
+  const ehLimiteDeCota =
+    erro?.status === 429 ||
+    erro?.message?.includes("429") ||
+    erro?.message?.includes("RESOURCE_EXHAUSTED") ||
+    erro?.message?.includes("quota");
+
+  // Retorna uma mensagem amigável se for limite de cota, senão a mensagem padrão.
+  return res.status(ehLimiteDeCota ? 429 : 500).json({
+    erro: ehLimiteDeCota
+      ? "Espere e tente novamente."
+      : erro?.message || "Não foi possível conversar com o Gemini.",
+  });
+}
 });
 
 // ============================================================
